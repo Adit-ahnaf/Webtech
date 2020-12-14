@@ -10,7 +10,9 @@ $prcategory = mysqli_real_escape_string($conn, $_REQUEST['ct']);
 $primage = $_FILES['filename']['name'];
 
  if(file_exists("../Controller/uploads/".$_FILES["filename"]["name"])){
+
  	echo "Image already exicts";
+ 	header("Location:../View/ViewProductDetails.php");
  }
  else{
 $sql = "INSERT INTO product (id, name, price, description, category, image) VALUES ('$prid', '$prname','$prprice', '$prdescription','$prcategory','$primage')";
