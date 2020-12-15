@@ -1,0 +1,65 @@
+<?php
+include 'dbconnection.php';
+
+$Username = mysqli_real_escape_string($conn, $_REQUEST['Username']);
+$Email = mysqli_real_escape_string($conn, $_REQUEST['Email']);
+$Admincode = mysqli_real_escape_string($conn, $_REQUEST['Admincode']);
+$Password = mysqli_real_escape_string($conn, $_REQUEST['Password']);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $counter = 0;
+  if (isset($_POST["Username"]) & !empty($_POST["Username"])) {
+    $firstname = test_input($_POST["Username"]);
+  }
+  else {
+    $firstnameErr = "Invalid Username";
+    $counter = $counter + 1;
+  }
+
+  
+  if (isset($_POST["Email"]) & !empty($_POST["Email"])) {
+    $firstname = test_input($_POST["Email"]);
+  }
+  else {
+    $firstnameErr = "Invalid Email";
+    $counter = $counter + 1;
+  }
+
+
+  if (isset($_POST["Admincode"]) & !empty($_POST["Admincode"])) {
+    $firstname = test_input($_POST["Admincode"]);
+  }
+  else {
+    $firstnameErr = "Invalid Admincode";
+    $counter = $counter + 1;
+  }
+
+
+  if (isset($_POST["Password"]) & !empty($_POST["Password"])) {
+    $firstname = test_input($_POST["Password"]);
+  }
+  else {
+    $firstnameErr = "Invalid FirstName";
+    $counter = $counter + 1;
+  }
+
+ 
+$sql = "INSERT INTO admin (Username, Email, Admincode, password) VALUES ('$Username', '$Email','$Admincode', '$Password')";
+if(mysqli_query($conn, $sql)){
+    echo "Records added successfully.";
+   
+  
+    
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+}
+} 
+
+
+ 
+
+mysqli_close($conn);
+
+
+
+?>
