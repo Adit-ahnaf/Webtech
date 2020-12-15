@@ -1,4 +1,9 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
 <?php
 include '../Model/dbconnection.php';
 
@@ -11,8 +16,8 @@ $primage = $_FILES['filename']['name'];
 
  if(file_exists("../Controller/uploads/".$_FILES["filename"]["name"])){
 
- 	echo "Image already exicts";
- 	header("Location:../View/ViewProductDetails.php");
+ 	echo '<script>alert("image already exists")</script>'; 
+ 	header('Location: ' . $_SERVER['HTTP_REFERER']);
  }
  else{
 $sql = "INSERT INTO product (id, name, price, description, category, image) VALUES ('$prid', '$prname','$prprice', '$prdescription','$prcategory','$primage')";
@@ -31,9 +36,7 @@ if(mysqli_query($conn, $sql)){
 mysqli_close($conn);
 
 
- 
-
-
-
-
 ?>
+
+</body>
+</html>

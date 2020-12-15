@@ -3,6 +3,7 @@
 <head>
   <link rel="stylesheet" type="text/css" href="ViewProductDetails.css">
   <link rel="stylesheet" type="text/css" href="Buttonstyle.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     .backbtn {
   background-color:  #e7e7e7; 
@@ -23,12 +24,6 @@
       display: grid;
     }
   </style>
-  <script >
-    var btn = document.getElementById('back');
-btn.addEventListener('click', function() {
-  document.location.href = 'AssignProductDetails.html';
-});
-  </script>
 </head>
 <body>
   <?php include '../Model/dbconnection.php';?>
@@ -46,7 +41,7 @@ btn.addEventListener('click', function() {
        ?>
              
              <div class="card">
-              <?php echo '<img src="../Controller/uploads/'.$row['image'].'" alt="Avatar" height="300px" width="230px">'?>
+              <?php echo '<img src="../Controller/uploads/'.$row['image'].'" alt="Avatar" style="width:100%"'?>
                <h4><b><?php echo $row['name']?></b></h4> 
                <p><?php echo "price:".$row['price']."description:   ".$row['description']."category:".$row['category'] ?></p>
                  <form action="EditPage.php" method="POST"><button class="buttonedit" type="submit" value="submit" name="editbtn">Edit</button>
