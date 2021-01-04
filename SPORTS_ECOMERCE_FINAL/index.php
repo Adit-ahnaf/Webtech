@@ -1,9 +1,18 @@
+<?php
+session_start();
+
+include('config.php');
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>CSS Website Layout</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <style>
 
 
@@ -90,6 +99,12 @@ img {vertical-align: middle;}
   animation-duration: 1.5s;
 }
 
+
+
+
+
+
+
 @-webkit-keyframes fade {
   from {opacity: .4} 
   to {opacity: 1}
@@ -171,14 +186,38 @@ body {
 
 /*about us*/
 .aside {
-  background-color:  #e6e600;
+  background-color:  #ddffcc;
   padding: 5px;
-  color:   #4da6ff;
+  color:   #0033cc;
   text-align: center;
   font-size: 10px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
+
+.aside1 {
+  background-color:  #ffcc00;
+  padding: 5px;
+  color:   #000000;
+  text-align: center;
+  font-size: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.col-4 {
+    width: 25%;
+    float: left;
+}
+.col-4 img{
+    width: 100%;
+}
+.col-4 {
+    width: 21%;
+    float: left;
+    margin: 20px;
+    /* border: 2px solid; */
+    box-shadow: 0 0 15px #525252;
+    text-align: center;
+}
 </style>
 </head>
 <body>
@@ -191,19 +230,28 @@ body {
   <a href="#">Home</a>
   <a href="http://localhost/WT/SPORTS_ECOMERCE_FINAL/accosories.html">Catagories</a>
   <a href="#">All Shops</a>
-  <a href="#">Campaign</a>
+  <a href="http://localhost/WT/SPORTS_ECOMERCE_FINAL/campign.html">Campaign</a>
   <a href="#">All Products</a>
   <a href="#">Brands</a>
   <a href="#">Gift Cards</a>
-  <a href="http://localhost/WT/SPORTS_ECOMERCE_FINAL/resisterform.html">Customer Accounts</a>
-  <a href="#">Chat</a>
+  <?php if(isset($_SESSION["userid"])){ 
+    ?>
+  <a href="account.php">Customer Accounts</a>
+  <a href="logout.php">Logout</a>
+  <?php } else{ ?>
+  <a href="login.php">login</a>
+  <a href="register.php">Register</a>
+
+
+  <?php } ?>
+  <a href="http://localhost/WT/SPORTS_ECOMERCE_FINAL/chat.html">Chat</a>
 </div>
 
 <br>
 
 
-
-
+<input type="text" name="search" onchange="datasearch()" id="name">
+<div class="show"></div>
 
 
 
@@ -267,11 +315,43 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";  
   dots[slideIndex-1].className += " active";
 }
+
+function datasearch(){
+
+
+    $.ajax({
+    url: 'data_search.php?name='+$('#name').val(),
+    type: 'GET',
+    dataType: 'json',
+
+    success: function(json) {
+
+      alert(json);
+
+    }
+  });
+
+        // // process the form
+        // $.ajax({
+        //     type        : 'GET', // define the type of HTTP verb we want to use (POST for our form)
+        //     url         : 'data_search.php?name='+$('#name').val(), // the url where we want to POST
+        //     dataType    : 'json', // what type of data do we expect back from the server
+        //                 encode          : true
+        // })
+        //     // using the done promise callback
+        //     .done(function(data) {
+
+        //         // log data to the console so we can see
+        //         alert(data);
+
+        //         // here we will handle errors and validation messages
+        //     });
+}
 </script>
 <br>
 
-<div class="smallcontainer" >
- <h2 class="title">Featured Products</h2>
+<div class="aside1" >
+ <h2 class="title">Featured Products</h2></div>
  <div class="row">
   <div class="col-4">
     <img src="pic/p1.jpg">
@@ -334,14 +414,13 @@ function showSlides(n) {
   </div>
 
 
+</div>
+</div>
 
 
 
 
-
-
-
-
+<br>
 
 
 
